@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1日1回お楽しみGACHA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Outfit:wght@300;500;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars-background"></div>
+    <div class="nebula-background"></div>
+
+    <main class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">1日1回お楽しみGACHA</h1>
+        </header>
+
+        <div class="machine-wrapper">
+            <div class="gacha-machine">
+                <div class="machine-body">
+                    <div class="glass-chamber">
+                        <div class="capsules-container" id="capsulesContainer">
+                            <!-- Capsules will be generated here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="machine-base">
+                    <div class="exit-chute">
+                        <div class="capsule-exit" id="capsuleExit"></div>
+                    </div>
+                    <div class="lever-area">
+                        <div class="lever-base"></div>
+                        <div class="lever-arm" id="leverArm">
+                            <div class="lever-knob"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="pull-button" id="pullButton">
+                <span class="btn-text">ガチャを回す</span>
+                <span class="btn-glow"></span>
+            </button>
+        </div>
+
+        <section class="collection-shelf">
+            <h3>コレクション</h3>
+            <div class="inventory" id="inventory">
+                <!-- Collected items will appear here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Prize Reveal -->
+    <div class="reveal-modal" id="revealModal">
+        <div class="modal-content">
+            <div class="rarity-glow"></div>
+            <div class="prize-display">
+                <div class="prize-icon-wrapper">
+                    <div id="prizeIcon" class="prize-icon"></div>
+                </div>
+                <h2 id="prizeName" class="prize-name"></h2>
+                <p id="prizeRarity" class="prize-rarity"></p>
+                <p id="prizeDescription" class="prize-description"></p>
+            </div>
+            <button class="close-modal" id="closeModal">受け取る</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
