@@ -8,9 +8,11 @@ const PRIZES = [
     { id: 'maxim', name: 'Kさんからの「謎の格言」授与', rarity: 'common', rarityLabel: '【残滓】わずかなK', icon: '07.png', description: 'Kさんが贈る、明日から使える（？）重すぎる一言', weight: 15 }
 ];
 
+const LOCAL_STORAGE_KEY = 'ksan_labels_fixed_inventory';
+
 const state = {
     isPulling: false,
-    inventory: JSON.parse(localStorage.getItem('ksan_labels_fixed_inventory')) || {}
+    inventory: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {}
 };
 
 // DOM Elements
@@ -21,6 +23,7 @@ const capsuleExit = document.getElementById('capsuleExit');
 const revealModal = document.getElementById('revealModal');
 const closeModal = document.getElementById('closeModal');
 const inventoryDisplay = document.getElementById('inventory');
+const resetButton = document.getElementById('resetButton');
 
 const prizeIcon = document.getElementById('prizeIcon');
 const prizeName = document.getElementById('prizeName');
@@ -215,8 +218,20 @@ function addToInventory(prize) {
     } else {
         state.inventory[prize.id] = { ...prize, count: 1 };
     }
-    localStorage.setItem('ksan_labels_fixed_inventory', JSON.stringify(state.inventory));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state.inventory));
     updateInventoryUI();
+}
+
+function resetInventory() {
+    console.log('Reset button clicked');
+    console.log('Current inventory items:', Object.keys(state.inventory).length);
+    if (Object.keys(state.inventory).length === 0) return;
+    
+    if (confirm('コレクションをリセットしてもよろしいですか？')) {
+        state.inventory = {};
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+        updateInventoryUI();
+    }
 }
 
 function updateInventoryUI() {
@@ -236,6 +251,7 @@ function updateInventoryUI() {
 // Event Listeners
 pullButton.addEventListener('click', pullGacha);
 leverArm.addEventListener('click', pullGacha);
+if (resetButton) resetButton.addEventListener('click', resetInventory);
 
 closeModal.addEventListener('click', () => {
     revealModal.classList.remove('active');
